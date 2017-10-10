@@ -66,7 +66,7 @@ var initDb = function(callback) {
 
   var mongodb = require('mongodb');
   if (mongodb == null) return;
-
+  console.log(mongoURL);
   mongoose.connect(mongoURL);
 };
 app.use(express.static(__dirname + '/public'));  
