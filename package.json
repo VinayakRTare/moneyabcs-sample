@@ -1,5 +1,5 @@
 {
- "name": "moneyabcs-sample",
+  "name": "moneyabcs-sample",
   "version": "0.0.1",
   "description": "UTA FLP MoneyABCs",
   "main": "server.js",
