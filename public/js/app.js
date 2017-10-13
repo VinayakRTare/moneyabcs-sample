@@ -239,7 +239,7 @@ app.controller("moneycontroller",function($scope,$http,$sce,$window){
         if($scope.searchParam == "" || $scope.searchParam == "Articles"){
 
             $http.post("/searchSample", {name: searchKey }).success(function(res) {
-            	alert(res)
+            	//alert(res)
                 if(res.data.length > 0){
                     var uniqueNames = [];
                     $.each(res.data, function(i, el){
