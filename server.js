@@ -58,6 +58,8 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
 
   }
 }
+
+mongoURL = "mongodb://flpf:emmanuel2015@http://mongodb-nodejsapp.b9ad.pro-us-east-1.openshiftapps.com:27017/moneyabcsdb";
 var db = null,
     dbDetails = new Object();
 
