@@ -59,7 +59,7 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
   }
 }
 
-
+mongoURL = "mongodb://flpf:emmanuel2015@172.30.131.189:27017/moneyabcsdb";
 var db = null,
     dbDetails = new Object();
 
