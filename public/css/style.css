@@ -691,43 +691,42 @@ a, a:hover, a:active, a:visited{
 
 /****************************************rating *********************************************/
 /*
-	Ratings Stars
-	(with as little code as possible)
+   Ratings Stars
+   (with as little code as possible)
 */
 .rating {
-  unicode-bidi: bidi-override;
-  direction: rtl;
-  text-align: left;
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    text-align: left;
     color: black;
-
 }
 .rating > span {
-  display: inline-block;
-  position: relative;
-  width: 1.2em;
-  font-size: 24px;
+    display: inline-block;
+    position: relative;
+    width: 1.2em;
+    font-size: 24px;
 
 }
 .rating > span:hover,
 .rating > span:hover ~ span {
-       content: "\2605";
+    content: "\2605";
 
-  color: transparent;
+    color: transparent;
 }
 .rating > span:hover:before,
 .rating > span:hover ~ span:before {
-   content: "\2605";
-   position: absolute;
-   left: 0;
-   color: gold;
+    content: "\2605";
+    position: absolute;
+    left: 0;
+    color: gold;
 }
 
 
 /****************************************rating *********************************************/
 
 .largeFont{
-   font-size: 21px;
-   font-weight: 700;
+    font-size: 21px;
+    font-weight: 700;
 }
 .bgColorWhite{
     background: white;
@@ -748,8 +747,6 @@ a, a:hover, a:active, a:visited{
 }
 
 .thumbnail .caption {
-    margin-bottom: 10px;
     padding: 0px !important;
     color: #333;
-
 }
