@@ -502,7 +502,7 @@ padding: 15px 32px; " ng-model="button" ng-disabled="!myprofile.$dirty">Update</
 
 <section ng-if="showpage =='default'" class="news pad20px" id="news-section">
     <div class="container-fluid bgColorWhite pad20px marginMain ">
-        <div class="row vdivide searchHide">
+        <div class="row vdivide searchHide"  style="margin-bottom: 3%;">
             <div class="search_results" id="search_results"></div>
             <div class="col-md-3 col-lg-3"> <img src="images/whats_hot.png">
                 <h3>WHAT'S IN THE NEWS?</h3>
@@ -583,7 +583,7 @@ padding: 15px 32px; " ng-model="button" ng-disabled="!myprofile.$dirty">Update</
             </div>
         </div>
         <div class="row vdivide" id="sub_news"> <span ng-repeat="articleObj in article">
-                    <div class="col-md-3">
+                    <div class="col-md-3" style="margin-bottom:5%;">
                        <div class="sidebar_icons">
                            <a class="fb-xfbml-parse-ignore"  data-url="http://www.moneyabcs.org" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{articleObj.iframeLink}}&amp;src=sdkpreparse" ><img src="images/share.png" class="share" rel="tooltip" data-placement="bottom" title="share"> </a>
                             <img data-toggle="modal" id="email_{{$index+3}}" data-ng-click="emailArticleToFriend($event)" data-target="#mailer" src="images/mail.png" class="mail" rel="tooltip" data-placement="bottom" title="mail">
@@ -704,7 +704,7 @@ padding: 15px 32px; " ng-model="button" ng-disabled="!myprofile.$dirty">Update</
                 <div class="customize_button" id="customize"> <a type="button" class="btn btn-default" data-toggle="modal" data-target="#customize-modal" style="display: block; width: 100%;">Personalize</a> </div>
             </div>
             <span ng-repeat="resourcesObj in resources">
-                <div class="col-md-3">
+                <div class="col-md-3" style="margin-bottom:5%;">
                         <div class=" sidebar_icons"> <!---->
                             <a class="fb-xfbml-parse-ignore"  data-url="http://www.moneyabcs.org" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{resourcesObj.webUrl}}&amp;src=sdkpreparse" ><img src="images/share.png" class="share" rel="tooltip" data-placement="bottom" title="share"> </a>
                              <img data-toggle="modal" id="resourceEmail_{{$index+1}}" data-ng-click="emailArticlesToFriend($event)" data-target="#mailer" src="images/mail.png" class="mail" rel="tooltip" data-placement="bottom" title="mail">
