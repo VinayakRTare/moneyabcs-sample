@@ -633,6 +633,7 @@ a, a:hover, a:active, a:visited{
     padding-top:12px!important;
     padding-left:0px!important;
     padding-bottom: 0px!important;
+    cursor: pointer;
 }
 
 .marginTop8{
