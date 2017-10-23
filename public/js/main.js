@@ -122,6 +122,7 @@ $(function () {
 $(function () {
     $('.topic-images').on("click", "div", function () {
            main_topics=[1,16,21,31,59,76,97,128,156,157];
+        // 1,16,20,29,56,72,92,122,151,152
         //$('.stickyFooter').show();
         if ($(this).css('border') !== '3px solid rgb(80, 198, 63)') {
             $(this).css('border', '3px solid rgb(80, 198, 63)').show('slow');
@@ -132,27 +133,29 @@ $(function () {
             var sel_img_pre=parseInt(sel_img)+1;
              $.getJSON( "/topics.json", function( data ) {
             for (i = main_topics[sel_img]+1; i < (main_topics[sel_img])+(main_topics[sel_img_pre]-main_topics[sel_img]); i++) {
-                 topic_images.append($('<div>', {
-                    id: i,
-                    class:'sub-topic-img'+i
-                })).show('slow')
-                $('.sub-topic-img'+i).css('background', '1px solid rgb(2, 26, 64)');
-                $('.sub-topic-img'+i).css('margin', '10px');
-                $('.sub-topic-img'+i).css('width', '200px');
-                $('.sub-topic-img'+i).css('height', '150px');
-                $('.sub-topic-img'+i).css('float', 'left');
-                $('.sub-topic-img'+i).css('background-image','linear-gradient( rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url(images/defaultImg/search_'+main_topics[sel_img]+'/search_'+i+'/2.png)');
-                $('.sub-topic-img'+i).css('background-size', 'cover');
-                $('<p>', {
-                class: 'topic-name'+i,
-                text: data[i].topics,
-                id: 'topic-name'+i
-            }).appendTo('.sub-topic-img'+i);
-            //$('.topic-name'+i).css(' position',' absolute');
-          //  $('.topic-name'+i).css(' bottom','20px');
-            $('.topic-name'+i).css('padding',' 60px');
-            $('.topic-name'+i).css('color','white');
-            $('.topic-name'+i).css(' margin','0');
+                if (topic_images.find(".sub-topic-img" + i)[0] === undefined) {
+                    topic_images.append($('<div>', {
+                        id: i,
+                        class: 'sub-topic-img' + i
+                    })).show('slow');
+                    $('.sub-topic-img' + i).css('background', '1px solid rgb(2, 26, 64)');
+                    $('.sub-topic-img' + i).css('margin', '10px');
+                    $('.sub-topic-img' + i).css('width', '200px');
+                    $('.sub-topic-img' + i).css('height', '150px');
+                    $('.sub-topic-img' + i).css('float', 'left');
+                    $('.sub-topic-img' + i).css('background-image', 'linear-gradient( rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url(images/defaultImg/search_' + main_topics[sel_img] + '/search_' + i + '/2.png)');
+                    $('.sub-topic-img' + i).css('background-size', 'cover');
+                    $('<p>', {
+                        class: 'topic-name' + i,
+                        text: data[i].topics,
+                        id: 'topic-name' + i
+                    }).appendTo('.sub-topic-img' + i);
+                    //$('.topic-name'+i).css(' position',' absolute');
+                    //  $('.topic-name'+i).css(' bottom','20px');
+                    $('.topic-name' + i).css('padding', ' 60px');
+                    $('.topic-name' + i).css('color', 'white');
+                    $('.topic-name' + i).css(' margin', '0');
+                }
             }
              });
         }else{
@@ -172,6 +175,7 @@ $(function () {
         $('.headDef').css('display','none');
         $('.headRes').css('display','block');
         $('#previous_customize').css('display','block');
+        $('#next_topics').css('display','none');
         $('.onkeysearchip').css('display','block');
         $('.topics').css('display','block');
         $('.customize_columns').css('display','none');
@@ -185,6 +189,7 @@ $(function () {
         $('.headRes').css('display','none');
          $('.footerContent').css('display','none');
          $('#previous_customize').css('display','none');
+        $('#next_topics').css('display','block');
         $('.onkeysearchip').css('display','none');
         $('.topics').css('display','none');
         $('.customize_columns').css('display','block');

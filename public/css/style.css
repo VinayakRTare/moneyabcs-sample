@@ -344,7 +344,7 @@ nav.shrink .top-search-bar{
 .tag::after {
     background: #fff;
     border-bottom: 13px solid transparent;
-    border-left: 10px solid #eee;
+    border-left: 10px;
     border-top: 13px solid transparent;
     content: '';
     position: absolute;
