@@ -147,7 +147,7 @@ nav.shrink .top-search-bar{
     position: relative;
     overflow: hidden;
 }
-
+/*
 .thumbnail:hover {
     display: block;
     background: rgba(0, 0, 0, .03);
@@ -163,7 +163,7 @@ nav.shrink .top-search-bar{
 .thumbnail:hover img {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
-}
+}*/
 
 .type {
     height: 45px;
