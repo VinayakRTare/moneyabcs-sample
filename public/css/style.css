@@ -782,7 +782,7 @@ padding-right: 20px;
 }
 @media screen and (max-width: 1550px) and (min-width: 1441px) {
 .searchMedia{
-    width: 370px!important;}
+    width: 345px!important;}
 }
 @media screen (min-width: 1551px) {
 .searchMedia{
