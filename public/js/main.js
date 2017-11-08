@@ -131,10 +131,15 @@ $(function () {
             var sel_img = this.id;
             var topic_images = $('.topic-images');
             var sel_img_pre=parseInt(sel_img)+1;
+            console.log(selected_img_id);
+            console.log(sel_img);
              $.getJSON( "/topics.json", function( data ) {
-            for (i = main_topics[sel_img]+1; i < (main_topics[sel_img])+(main_topics[sel_img_pre]-main_topics[sel_img]); i++) {
+            // for (i = main_topics[sel_img]+1; i < (main_topics[sel_img])+(main_topics[sel_img_pre]-main_topics[sel_img]); i++) {
+            for (i = (main_topics[sel_img])+(main_topics[sel_img_pre]-main_topics[sel_img]) - 1; i >= main_topics[sel_img]+1; i--) {
                 if (topic_images.find(".sub-topic-img" + i)[0] === undefined) {
-                    topic_images.append($('<div>', {
+
+                    // topic_images.append($('<div>', {
+                    $('.topic-img'+sel_img).after($('<div>', {
                         id: i,
                         class: 'sub-topic-img' + i
                     })).show('slow');
