@@ -236,6 +236,8 @@ app.controller("moneycontroller",function($scope,$http,$sce,$window){
     $scope.searchArticle = function(className) {
         var searchKey = document.getElementsByClassName(className)[0].value;
         //alert(searchKey)
+        // console.log(searchKey);
+        // console.log($scope.searchParam);
         if($scope.searchParam == "" || $scope.searchParam == "Articles"){
 
             $http.post("/searchSample", {name: searchKey }).success(function(res) {
@@ -309,31 +311,53 @@ app.controller("moneycontroller",function($scope,$http,$sce,$window){
         }
 
     }
-    var setData = function(res){
+    var setData = function(res,sort_type){
+        console.log("Set Data.....................................");
+        console.log(sort_type);
         var url = "";
-        if(!localStorage.getItem("fromEmailArticle") || localStorage.getItem("fromEmailArticle") == ""){
-            res = res.sort(function(a, b) {
-                return b.rank - a.rank;
-            });
+        if(!localStorage.getItem("fromEmailArticle") || localStorage.getItem("fromEmailArticle") == "") {
+
+            if((sort_type) && (sort_type === "Date"))
+            {
+                //sort res based on date
+                res = res.sort(function (a, b) {
+                    return new Date(b.date) - new Date(a.date);
+                });
+            }
+            else
+            {
+                //sort res based on rank
+                res = res.sort(function (a, b) {
+                    return b.rank - a.rank;
+                });
+            }
+
+            //push old data into array rear side
             var tempRes;
             for(var i=0;i<11;i++){
-                console.log(res[i].daysInLead)
+                // console.log(res[i].daysInLead);
                 if(res[i].daysInLead >= 5){
-                    console.log(res[i])
+                    console.log(res[i]);
                     tempRes = res.splice(i,1);
-                    console.log(res[i])
-                    console.log(tempRes)
+                    console.log(res[i]);
+                    console.log(tempRes);
                     //console.log(res)
-                    res.push(tempRes[0])
-                    console.log(res)
+                    res.push(tempRes[0]);
+                    console.log(res);
                 }
             }
+
         }
+        // console.log(res);
         $scope.backUp = res;
         $scope.totalRes = res;
         ($scope.totalRes.length > 11 ? "" : $scope.hideShowMore = !$scope.hideShowMore);
+        // console.log($scope.totalRes === res);
+        // console.log("---------------");
         $scope.articleFeatured = $scope.totalRes.splice(0,3);
         $scope.article = $scope.totalRes.splice(0,8);
+        console.log($scope.articleFeatured);
+        console.log($scope.article);
         /*for(var i=0;i<8;i++){
          url = $scope.article[i].iframeLink;
          $scope.article[i].iframeLink = $sce.trustAsResourceUrl(url);
@@ -436,7 +460,10 @@ app.controller("moneycontroller",function($scope,$http,$sce,$window){
     }
 
     var getFeaturedArticles = function($scope){
-
+        console.log("getFeaturedArticles.......................................................");
+        //purpose
+        //articleTopics - ???
+        //fromEmailArticle - ???
 
         $scope.func = function(){
 
@@ -451,6 +478,7 @@ app.controller("moneycontroller",function($scope,$http,$sce,$window){
             var articleTopics = localStorage.getItem("articleTopics");
             console.log(articleTopics);
             if(articleTopics){
+                console.log("If...");
                 $http.post("/article/chosenTopics", {articleTopics : localStorage.getItem("articleTopics") }).success(function(res) {
                     console.log(res);
                     for(var i=0;i<res.length;i++){
@@ -459,14 +487,15 @@ app.controller("moneycontroller",function($scope,$http,$sce,$window){
                     if(localStorage.getItem("fromEmailArticle") && localStorage.getItem("fromEmailArticle") != ""){
                         var searchKey = $('<textarea />').html(localStorage.getItem("fromEmailArticle")).text();
                         $http.post("/searchArticle", {name: searchKey }).success(function(result) {
-                            console.log(result)
+                            console.log(result);
+                            var articlesdata;
                             if(result.data.length > 0){
                                 result.data[0].indexTopic = result.data[0].topicName;
-                                johnRemoved = res.filter(function(el) {
+                                articlesdata = res.filter(function(el) {
                                     return el.title !== result.data[0].title;
                                 });
-                                johnRemoved.unshift(result.data[0])
-                                setData(johnRemoved);
+                                articlesdata.unshift(result.data[0]);
+                                setData(articlesdata);
                                 localStorage.setItem("fromEmailArticle","")
                             }
                         })
@@ -484,28 +513,32 @@ app.controller("moneycontroller",function($scope,$http,$sce,$window){
                     }
                 });
             } else {
+                console.log("else...");
                 $http.get("/article/featured").success(function(res){
                     if(localStorage.getItem("fromEmailArticle") && localStorage.getItem("fromEmailArticle") != ""){
                         var featuredData = res;
-                        console.log(featuredData)
+                        console.log(featuredData);
                         var searchKey = $('<textarea />').html(localStorage.getItem("fromEmailArticle")).text();
-                        console.log(searchKey)
+                        console.log(searchKey);
                         $http.post("/searchArticle", {name: searchKey }).success(function(res) {
-                            console.log(res.data.length)
+                            console.log(res.data[0]);
+                            console.log(res.data.length);
+                            var articlesdata;
                             if(res.data.length > 0){
                                 res.data[0].indexTopic = (res.data[0].topicName ?  res.data[0].topicName : res.data[0].indexTopic);
-                                console.log(res.data)
-                                johnRemoved = featuredData.filter(function(el) {
+                                console.log(res.data);
+                                articlesdata = featuredData.filter(function(el) {
                                     return el.title !== res.data[0].title;
                                 });
-                                johnRemoved.unshift(res.data[0])
-                                setData(johnRemoved);
+                                console.log(articlesdata);
+                                articlesdata.unshift(res.data[0]);
+                                setData(articlesdata);
                                 localStorage.setItem("fromEmailArticle","")
                             }
                         })
                     } else {
                         console.log("inside featured");
-                        console.log(res);
+                        console.log(res.splice(0,11));
                         setData(res);
                     }
                 });
@@ -618,8 +651,19 @@ app.controller("moneycontroller",function($scope,$http,$sce,$window){
             });
     };
 
-
-
+    $scope.newssortby = "Rank";
+    $scope.onNewsSortChange = function(sortby){
+        console.log(sortby);
+        $http.get("/article/featured").success(function(res){
+            if((sortby) && (sortby === "Date"))
+            {
+                setData(res,sortby);
+            }
+            else {
+                setData(res);
+            }
+        });
+    }
 
 	/*moneyController($scope,$http,$sce,$window);*/
 });

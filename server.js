@@ -36,7 +36,7 @@ app.use(morgan('combined'))
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
-    mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
+    mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL, // || 'mongodb://localhost/moneyabcsdb',
     mongoURLLabel = "";
 
 if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
@@ -123,12 +123,12 @@ var ArticleSchema = new mongoose.Schema({
 	snippet : String,
 	imgUrl : String,
 	displayLink:String, //domain
-	rank : String,
-	globalRank : String,
+	rank : Number,
+	globalRank : Number,
 	index : "",
 	indexTopic :"",
-	topicRank : "",
-	daysInLead : ""
+	topicRank : Number,
+	daysInLead : Number
 },{collection : 'articleFeaturedRes'}); // articleFeaturedRes
 var ArticleFeaturedResult = mongoose.model('ArticleFeaturedResult',ArticleSchema);
 
@@ -139,8 +139,8 @@ var ArticleSchemaFake = new mongoose.Schema({
 	snippet : String,
 	imgUrl : String,
 	displayLink:String,
-	rank : String,
-	globalRank : String,
+	rank : Number,
+	globalRank : Number,
 	index : ""
 
 },{collection : 'articleResFake'}); //override default collection name as web
@@ -243,6 +243,7 @@ app.post("/api/editUserProfile", function (req,res){
 
 app.get("/article/featured", function (req,res){
 	ArticleFeaturedResult.find(function(err,data){
+		console.log(data);
 		res.json(data);
 	});
 });
@@ -426,7 +427,7 @@ var searchArticle = function(searchKeyword,res){
 	console.log(searchKeyword)
 	console.log("-----------------------------------------------")
 	var data = ArticleSearchResult.find({"title": searchKeyword},function(err,data){
-		console.log(data)
+		console.log(data);
 		if(data.length > 0){
 			var result = {
 				"data" : data,
@@ -435,8 +436,8 @@ var searchArticle = function(searchKeyword,res){
 			res.json(result);
 		} else {
 			var data = ArticleFeaturedResult.find({"title": searchKeyword},function(err,data){
-				console.log("inside 2nd")
-				console.log(data)
+				console.log("inside 2nd");
+				console.log(data);
 				if(data.length > 0){
 					var result = {
 						"data" : data,
@@ -469,6 +470,7 @@ var searchChosenArticles = function(searchKeyword,res){
 		arr[i] = arr[i].replace(/ /g,"%20");
 	}
 	var data = ArticleSearchResult.find({topicName : { $in:arr}},function(err,data){
+		console.log(data);
 		res.json(data);
 	});
 }
