@@ -30,15 +30,15 @@ function createCard(featureName) {
         "<p class='card-text'>"+features[featureName].Description+"</p>"+
         "<a href='#' class='btn btn-primary'>"+features[featureName].Button+"</a>";
     //var compiledElement = $compile(html)($scope);
-    if(featureName === "Upload Resource"){
-        document.getElementById('card').appendChild(<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSefqodRV5ZgCYJUsxQbt2RrQZ9QYlyRDqotiADJv4acvKj8dw/viewform?embedded=true" width="760" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>);
+    if(featureName == "Upload Resource"){
+        html = "<h3>Upload Form</h3><iframe src="https://docs.google.com/forms/d/e/1FAIpQLSefqodRV5ZgCYJUsxQbt2RrQZ9QYlyRDqotiADJv4acvKj8dw/viewform?embedded=true" width="760" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>";
     }
-    else{                                               
+                                                   
     var target = document.getElementById('card');
     $(target).empty();
     $(target).append(html);
     //angular.element(target).append(compiledElement);
-    }
+    
 }
 
 createCard("Access Resources");
