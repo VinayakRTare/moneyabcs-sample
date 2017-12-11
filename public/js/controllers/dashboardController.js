@@ -31,16 +31,7 @@ function createCard(featureName) {
         "<a href='#' class='btn btn-primary'>"+features[featureName].Button+"</a>";
     //var compiledElement = $compile(html)($scope);
     
-    if(featureName == "Upload Resource"){
-        console.log("in if featurename");
-        document.getElementById('contentForm').style.display = "block";
-    }
-    else{
-        console.log("in else featurename");
-        console.log(featureName == "Upload Resource);
-     document.getElementById('contentForm').style.display = "none";
-    }
-                                                   
+                                          
     var target = document.getElementById('card');
     $(target).empty();
     $(target).append(html);
